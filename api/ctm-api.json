@@ -1,4 +1,7 @@
-{"condition":"on",
-"version":"v1.0",
-"api":"running"
+{
+    "condition": "on",
+    "product":"CTM",
+    "code":"CYFER",
+    "version": "v1.0",
+    "api": "running"
 }
