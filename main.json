@@ -1,17 +1,37 @@
 import requests
 import json
 
-def get_api_data(url):
-    response = requests.get(url)
-    if response.status_code == 200:
-        return response.json()
-    else:
-        print(f"Error: {response.status_code}")
-        return   
- None
+def get_temp_mail_data(email_address, session):
+  """
+  ฟังก์ชันสำหรับดึงข้อมูล email จาก Temp Mail
 
-# สมมติว่า rg คือฟังก์ชันที่ส่ง request ไปยัง API
-api_data = rg("https://api.internal.temp-mail.io/api/v3/domains")
+  Args:
+    email_address: อีเมลแอดเดรสที่ต้องการตรวจสอบ
+    session: Session object สำหรับส่ง request
 
-# แปลงผลลัพธ์เป็น JSON (ไม่จำเป็นต้องทำอีกครั้ง เพราะ get_api_data() ได้แปลงให้แล้ว)
-json_data = json.dumps(api_data)
+  Returns:
+    ข้อมูล email ในรูปแบบ JSON หรือ None ถ้าเกิด error
+  """
+
+  url = f"https://api.internal.temp-mail.io/api/v3/mails/{email_address}"
+  headers = {"Authorization": "Bearer YOUR_API_TOKEN"}  # เปลี่ยนเป็น API token ของคุณ
+  response = session.get(url, headers=headers)
+
+  if response.status_code == 200:
+    return response.json()
+  else:
+    print(f"Error: {response.status_code}")
+    return None   
+
+
+# สร้าง session
+session = requests.Session()
+
+# ตัวอย่างการใช้งาน
+email = "your_temp_email@temp-mail.io"
+data = get_temp_mail_data(email, session)
+
+if data:
+  # เก็บข้อมูลล่าสุดไว้ใน session (ตัวอย่างการเก็บ)
+  session['last_email'] = data
+  print(data)
