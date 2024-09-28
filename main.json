@@ -1,0 +1,17 @@
+import requests
+import json
+
+def get_api_data(url):
+    response = requests.get(url)
+    if response.status_code == 200:
+        return response.json()
+    else:
+        print(f"Error: {response.status_code}")
+        return   
+ None
+
+# สมมติว่า rg คือฟังก์ชันที่ส่ง request ไปยัง API
+api_data = rg("https://api.internal.temp-mail.io/api/v3/domains")
+
+# แปลงผลลัพธ์เป็น JSON (ไม่จำเป็นต้องทำอีกครั้ง เพราะ get_api_data() ได้แปลงให้แล้ว)
+json_data = json.dumps(api_data)
