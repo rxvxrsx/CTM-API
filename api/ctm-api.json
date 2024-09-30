@@ -1,7 +1,7 @@
 {
     "condition": "on",
-    "product":"CTMi",
+    "product":"CTM",
     "code":"CYFER",
-    "version": "v1.0",
+    "version": "v1.1",
     "api": "running"
 }
